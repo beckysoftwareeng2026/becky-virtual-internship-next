@@ -1,9 +1,10 @@
 import BookRow from "./BookRow";
+import { Book } from "@/lib/types";
 
 interface BookPillProps {
-  selectedBooks: any[];
-  recommendedBooks: any[];
-  suggestedBooks: any[];
+  selectedBooks: Book[];
+  recommendedBooks: Book[];
+  suggestedBooks: Book[];
 }
 
 export default function BookPill({
@@ -17,7 +18,7 @@ export default function BookPill({
     <>
       {selectedBook ? (
         <div>
-          <strong>Selected Book:</strong> {selectedBook.title || selectedBook.name || JSON.stringify(selectedBook)}
+          <strong>Selected Book:</strong> {selectedBook.title || JSON.stringify(selectedBook)}
         </div>
       ) : null}
 
