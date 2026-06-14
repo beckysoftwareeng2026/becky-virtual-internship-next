@@ -1,5 +1,6 @@
 import { getBook } from "@/lib/api";
 import ButtonLink from "@/components/ButtonLink";
+import BookStats from "@/components/BookStats";
 
 type Props = {
   params: Promise<{
@@ -17,10 +18,7 @@ export default async function BookPage({ params }: Props) {
 
     <h1>{book.title}</h1>
 
-    <p>⭐ {book.averageRating}</p>
-    <p>{book.totalRating} ratings</p>
-    <p>{book.keyIdeas} key ideas</p>
-    <p>{book.type}</p>
+  <BookStats book={book} />
 
     <p>{book.author}</p>
     <p>{book.subTitle}</p>
