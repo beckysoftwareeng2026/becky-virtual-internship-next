@@ -1,52 +1,38 @@
-import BookCard from "@/components/BookCard";
 import {
   getSelectedBooks,
   getRecommendedBooks,
   getSuggestedBooks,
 } from "@/lib/api";
+import SectionTitle from "@/components/SectionTitle";
+import BookRow from "@/components/BookRow";
+import SelectedBook from "@/components/SelectedBook";
+import PageTitle from "@/components/PageTitle";
 
+// SelectedBook has an incorrect typing (returns void). Cast to any to allow JSX usage.
+const Selected: any = SelectedBook;
 
 export default async function ForYouPage() {
   const selectedBooks = await getSelectedBooks();
   const recommendedBooks = await getRecommendedBooks();
   const suggestedBooks = await getSuggestedBooks();
 
-  return (
-    <div>
-      <h1>For You</h1>
+return (
+  <div>
+    <PageTitle>For You</PageTitle>
 
-      <h2>Selected</h2>
-      <div className="selected-book">
-  <img
-    src={selectedBooks[0].imageLink}
-    alt={selectedBooks[0].title}
-    width="200"
-  />
+    <SectionTitle>Selected</SectionTitle>
 
-  <h3>{selectedBooks[0].title}</h3>
+    <Selected book={selectedBooks[0]} />
 
-  <p>{selectedBooks[0].author}</p>
+    <BookRow
+      title="Recommended"
+      books={recommendedBooks}
+    />
 
-  <p>{selectedBooks[0].subTitle}</p>
-</div>
-     
-
-
-
-      <h2>Recommended</h2>
-    <div className="book-grid">
-  {recommendedBooks.map((book: any) => (
-    <BookCard key={book.id} book={book} />
-  ))}
-</div>
-
-      <h2>Suggested</h2>
-
-<div className="book-grid">
-  {suggestedBooks.map((book: any) => (
-    <BookCard key={book.id} book={book} />
-  ))}
-</div>
-    </div>
-  );
+    <BookRow
+      title="Suggested"
+      books={suggestedBooks}
+    />
+  </div>
+);
 }

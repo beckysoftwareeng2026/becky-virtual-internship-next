@@ -1,18 +1,13 @@
 import Link from "next/link";
+import { Book } from "@/lib/types";
 
-type Book = {
-  id: string;
-  title: string;
-  author: string;
-  imageLink: string;
-  averageRating: number;
-  totalRating: number;
-  subTitle: string;
+type Props = {
+  book: Book;
 };
 
-export default function BookCard({ book }: { book: Book }) {
+export default function BookCard({ book }: Props) {
  return (
-  <Link href={`/book/${book.id}`}>
+  <Link href={`/book/${book.id}`} className="book-card-link">
     <div className="book-card">
       <img
         src={book.imageLink}

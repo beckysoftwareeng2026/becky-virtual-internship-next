@@ -1,19 +1,23 @@
+import PageContainer from "@/components/PageContainer";
+import PageTitle from "@/components/PageTitle";
+import PlanCard from "@/components/PlanCard";
+
 export default function ChoosePlanPage() {
   return (
-    <div className="choose-plan">
-      <h1>Choose Your Plan</h1>
+    <PageContainer>
+      <PageTitle>
+        Choose Your Plan
+      </PageTitle>
 
-      <div className="plan-card">
-        <h2>Basic</h2>
-        <p>$0/month</p>
-        <button>Select Plan</button>
-      </div>
+      <PlanCard
+        title="Basic"
+        price="$0/month"
+      />
 
-      <div className="plan-card">
-        <h2>Premium</h2>
-        <p>$9.99/month</p>
-        <button>Select Plan</button>
-      </div>
-    </div>
+      <PlanCard
+        title="Premium"
+        price="$9.99/month"
+      />
+    </PageContainer>
   );
 }
