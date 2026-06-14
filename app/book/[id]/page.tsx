@@ -1,4 +1,5 @@
 import { getBook } from "@/lib/api";
+import ButtonLink from "@/components/ButtonLink";
 
 type Props = {
   params: Promise<{
@@ -23,6 +24,7 @@ export default async function BookPage({ params }: Props) {
 
     <p>{book.author}</p>
     <p>{book.subTitle}</p>
+    <ButtonLink href={`/player/${book.id}`}>Listen Now</ButtonLink>
 
     <img
       src={book.imageLink}
