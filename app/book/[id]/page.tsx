@@ -1,6 +1,8 @@
 import { getBook } from "@/lib/api";
 import ButtonLink from "@/components/ButtonLink";
 import BookStats from "@/components/BookStats";
+import PageContainer from "@/components/PageContainer";
+import PageTitle from "@/components/PageTitle";
 
 type Props = {
   params: Promise<{
@@ -14,15 +16,18 @@ export default async function BookPage({ params }: Props) {
   const book = await getBook(id);
 
   return (
-    <div className="book-page">
+   <PageContainer>
+  <div className="book-page">
+    <PageTitle>{book.title}</PageTitle>
 
-    <h1>{book.title}</h1>
-
-  <BookStats book={book} />
+    <BookStats book={book} />
 
     <p>{book.author}</p>
     <p>{book.subTitle}</p>
-    <ButtonLink href={`/player/${book.id}`}>Listen Now</ButtonLink>
+
+    <ButtonLink href={`/player/${book.id}`}>
+      Listen Now
+    </ButtonLink>
 
     <img
       src={book.imageLink}
@@ -32,10 +37,8 @@ export default async function BookPage({ params }: Props) {
 
     <h2>{book.subTitle}</h2>
 
-    <p className="book-summary">
-      {book.summary}
-    </p>
-
+    <p className="book-summary">{book.summary}</p>
   </div>
+</PageContainer>
 );
 }
