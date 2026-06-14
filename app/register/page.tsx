@@ -1,15 +1,22 @@
-import PageContainer from "@/components/PageContainer";
-import PageTitle from "@/components/PageTitle";
+import Link from "next/link";
 import AuthForm from "@/components/AuthForm";
 
 export default function RegisterPage() {
   return (
-    <PageContainer>
-      <PageTitle>Register</PageTitle>
+    <div className="auth-page">
+      <div className="auth-modal">
+        <div className="auth-close">×</div>
 
-      <AuthForm
-        buttonText="Create Account"
-      />
-    </PageContainer>
+        <h2>Create your account</h2>
+
+        <AuthForm buttonText="Create Account" />
+
+        <div className="auth-footer">
+          <Link href="/login">
+            Already have an account?
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

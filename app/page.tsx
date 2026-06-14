@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 // Minimal inline icon components to avoid dependency on `react-icons/ai`.
 const AiFillFileText = (props: React.HTMLAttributes<SVGElement>) => (
@@ -53,7 +54,9 @@ export default function Page() {
             <img className="nav__img" src="/assets/logo.png" alt="logo" />
           </figure>
           <ul className="nav__list--wrapper">
-            <li className="nav__list nav__list--login">Login</li>
+           <li className="nav__list nav__list--login">
+  <Link href="/login">Login</Link>
+</li>
             <li className="nav__list nav__list--mobile">About</li>
             <li className="nav__list nav__list--mobile">Contact</li>
             <li className="nav__list nav__list--mobile">Help</li>
@@ -76,7 +79,9 @@ export default function Page() {
                 <br className="remove--tablet" />
                 and even people who don’t like to read.
               </div>
-              <button className="btn home__cta--btn">Login</button>
+           <Link href="/login" className="btn">
+  Login
+</Link>
             </div>
             <figure className="landing__image--mask">
               <img src="/assets/landing.png" alt="landing" />

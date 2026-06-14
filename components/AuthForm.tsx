@@ -11,7 +11,7 @@ export default function AuthForm({
     <form className="auth-form">
       <input
         type="email"
-        placeholder="Email"
+        placeholder="Email Address"
       />
 
       <input
