@@ -8,8 +8,7 @@ import BookRow from "@/components/BookRow";
 import SelectedBook from "@/components/SelectedBook";
 import PageTitle from "@/components/PageTitle";
 
-// SelectedBook has an incorrect typing (returns void). Cast to any to allow JSX usage.
-const Selected: any = SelectedBook;
+
 
 export default async function ForYouPage() {
   const selectedBooks = await getSelectedBooks();
@@ -21,8 +20,7 @@ return (
     <PageTitle>For You</PageTitle>
 
     <SectionTitle>Selected</SectionTitle>
-
-    <Selected book={selectedBooks[0]} />
+<SelectedBook book={selectedBooks[0]} />
 
     <BookRow
       title="Recommended"
