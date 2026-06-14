@@ -1,4 +1,4 @@
-import { Book } from "../lib/types";
+import { Book } from "@/lib/types";
 
 type Props = {
   book: Book;
