@@ -5,7 +5,9 @@ export default function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-modal">
-        <div className="auth-close">×</div>
+       <Link href="/" className="auth-close">
+  ×
+</Link>
 
         <h2>Log in to Summarist</h2>
 

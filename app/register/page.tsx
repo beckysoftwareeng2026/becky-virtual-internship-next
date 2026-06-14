@@ -5,7 +5,9 @@ export default function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-modal">
-        <div className="auth-close">×</div>
+       <Link href="/" className="auth-close">
+  ×
+</Link>
 
         <h2>Create your account</h2>
 
