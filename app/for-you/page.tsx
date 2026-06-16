@@ -6,7 +6,10 @@ import {
 import SectionTitle from "@/components/SectionTitle";
 import BookRow from "@/components/BookRow";
 import SelectedBook from "@/components/SelectedBook";
-import PageTitle from "@/components/PageTitle";
+
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+import AuthGuard from "@/components/AuthGuard";
 
 
 
@@ -16,21 +19,23 @@ export default async function ForYouPage() {
   const suggestedBooks = await getSuggestedBooks();
 
 return (
-  <div>
-    <PageTitle>For You</PageTitle>
+  <AuthGuard>
+    <div className="dashboard">
+      <Sidebar />
 
-    <SectionTitle>Selected</SectionTitle>
-<SelectedBook book={selectedBooks[0]} />
+      <main className="dashboard__main">
+        <Navbar />
 
-    <BookRow
-      title="Recommended"
-      books={recommendedBooks}
-    />
+        <SectionTitle>Selected just for you</SectionTitle>
+        <SelectedBook book={selectedBooks[0]} />
 
-    <BookRow
-      title="Suggested"
-      books={suggestedBooks}
-    />
-  </div>
+        <BookRow title="Recommended For You" books={recommendedBooks} />
+
+        <BookRow title="Suggested Books" books={suggestedBooks} />
+      </main>
+    </div>
+  </AuthGuard>
 );
+
+
 }

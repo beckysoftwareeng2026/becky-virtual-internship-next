@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="navbar">
-      <Link href="/">Home</Link>
-      <Link href="/for-you">For You</Link>
-      <Link href="/settings">Settings</Link>
-      <Link href="/choose-plan">Choose Plan</Link>
+    <nav className="dashboard__navbar">
+      <div className="dashboard__search">
+        <input placeholder="Search for books" />
+        <button>⌕</button>
+      </div>
     </nav>
   );
 }

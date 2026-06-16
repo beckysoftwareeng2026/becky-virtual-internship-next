@@ -3,6 +3,7 @@ import ButtonLink from "@/components/ButtonLink";
 import BookStats from "@/components/BookStats";
 import PageContainer from "@/components/PageContainer";
 import PageTitle from "@/components/PageTitle";
+import AuthGuard from "@/components/AuthGuard";
 
 type Props = {
   params: Promise<{
@@ -16,6 +17,7 @@ export default async function BookPage({ params }: Props) {
   const book = await getBook(id);
 
   return (
+    <AuthGuard>
    <PageContainer>
   <div className="book-page">
     <PageTitle>{book.title}</PageTitle>
@@ -40,5 +42,6 @@ export default async function BookPage({ params }: Props) {
     <p className="book-summary">{book.summary}</p>
   </div>
 </PageContainer>
+</AuthGuard>
 );
 }

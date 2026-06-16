@@ -1,17 +1,13 @@
 import AuthGuard from "@/components/AuthGuard";
 import PageContainer from "@/components/PageContainer";
 import PageTitle from "@/components/PageTitle";
-import UserEmail from "@/components/UserEmail";
 
-export default function SettingsPage() {
+export default function SearchPage() {
   return (
     <AuthGuard>
       <PageContainer>
-        <PageTitle>Settings</PageTitle>
-
-        <UserEmail />
-
-        <p>Status: Free Plan</p>
+        <PageTitle>Search</PageTitle>
+        <p>Search functionality coming soon.</p>
       </PageContainer>
     </AuthGuard>
   );
