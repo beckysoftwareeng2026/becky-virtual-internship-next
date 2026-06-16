@@ -24,15 +24,16 @@ return (
       <Sidebar />
 
       <main className="dashboard__main">
-        <Navbar />
+  <Navbar />
 
-        <SectionTitle>Selected just for you</SectionTitle>
-        <SelectedBook book={selectedBooks[0]} />
+  <div className="dashboard__content">
+    <SectionTitle>Selected just for you</SectionTitle>
+    <SelectedBook book={selectedBooks[0]} />
 
-        <BookRow title="Recommended For You" books={recommendedBooks} />
-
-        <BookRow title="Suggested Books" books={suggestedBooks} />
-      </main>
+    <BookRow title="Recommended For You" books={recommendedBooks} />
+    <BookRow title="Suggested Books" books={suggestedBooks} />
+  </div>
+</main>
     </div>
   </AuthGuard>
 );
