@@ -1,9 +1,8 @@
 import { getBook } from "@/lib/api";
-import ButtonLink from "@/components/ButtonLink";
-import BookStats from "@/components/BookStats";
-import PageContainer from "@/components/PageContainer";
-import PageTitle from "@/components/PageTitle";
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
 import AuthGuard from "@/components/AuthGuard";
+import BookPage from "@/components/BookPage";
 
 type Props = {
   params: Promise<{
@@ -11,37 +10,26 @@ type Props = {
   }>;
 };
 
-export default async function BookPage({ params }: Props) {
+export default async function BookPageRoute({ params }: Props) {
   const { id } = await params;
 
   const book = await getBook(id);
+  console.log(JSON.stringify(book, null, 2));
+  
 
-  return (
-    <AuthGuard>
-   <PageContainer>
-  <div className="book-page">
-    <PageTitle>{book.title}</PageTitle>
+return (
+  <AuthGuard>
+    <div className="dashboard">
+      <Sidebar />
 
-    <BookStats book={book} />
+      <main className="dashboard__main">
+        <Navbar />
 
-    <p>{book.author}</p>
-    <p>{book.subTitle}</p>
-
-    <ButtonLink href={`/player/${book.id}`}>
-      Listen Now
-    </ButtonLink>
-
-    <img
-      src={book.imageLink}
-      alt={book.title}
-      width={250}
-    />
-
-    <h2>{book.subTitle}</h2>
-
-    <p className="book-summary">{book.summary}</p>
-  </div>
-</PageContainer>
-</AuthGuard>
+        <div className="dashboard__content">
+          <BookPage book={book} />
+        </div>
+      </main>
+    </div>
+  </AuthGuard>
 );
 }
