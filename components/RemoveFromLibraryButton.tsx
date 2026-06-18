@@ -2,7 +2,6 @@
 
 import { doc, deleteDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
-import Link from "next/link";
 
 type Props = {
   bookId: string;
@@ -18,10 +17,9 @@ export default function RemoveFromLibraryButton({ bookId, onRemove }: Props) {
 
     onRemove(bookId);
   }
-
   return (
-  <Link href="/for-you" className="library-empty__button">
-  Browse Books
-</Link>
+    <button className="library-remove" onClick={handleRemove}>
+      Remove
+    </button>
   );
 }

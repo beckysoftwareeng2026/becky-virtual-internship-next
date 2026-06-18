@@ -1159,3 +1159,12 @@ button:disabled {
 .library-empty__button:hover {
   opacity: 0.9;
 }
+.search-page__input {
+  width: 100%;
+  max-width: 480px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid #d9e1e7;
+  border-radius: 6px;
+  margin: 24px 0 32px;
+}

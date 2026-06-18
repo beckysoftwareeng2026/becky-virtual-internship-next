@@ -38,13 +38,11 @@ export default function LibraryPage() {
           <div className="dashboard__content">
             <h1>My Library</h1>
 
-            {bookIds.length === 0 ? (
-              <p>Your saved books will appear here.</p>
-            ) : (
+            
               <div>
-               <LibraryBooks bookIds={bookIds} />
+                <LibraryBooks bookIds={bookIds} />
               </div>
-            )}
+            
           </div>
         </main>
       </div>

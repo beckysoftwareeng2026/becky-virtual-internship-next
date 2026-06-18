@@ -1,14 +1,23 @@
 import AuthGuard from "@/components/AuthGuard";
-import PageContainer from "@/components/PageContainer";
-import PageTitle from "@/components/PageTitle";
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+import SearchBooks from "@/components/SearchBooks";
 
 export default function SearchPage() {
   return (
     <AuthGuard>
-      <PageContainer>
-        <PageTitle>Search</PageTitle>
-        <p>Search functionality coming soon.</p>
-      </PageContainer>
+      <div className="dashboard">
+        <Sidebar />
+
+        <main className="dashboard__main">
+          <Navbar />
+
+          <div className="dashboard__content">
+            <h1>Search</h1>
+            <SearchBooks />
+          </div>
+        </main>
+      </div>
     </AuthGuard>
   );
 }
