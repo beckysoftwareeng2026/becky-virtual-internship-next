@@ -804,7 +804,19 @@ button:disabled {
   display: flex;
   gap: 24px;
   overflow-x: auto;
-  padding-bottom: 16px;
+  overflow-y: hidden;
+  max-width: 100%;
+  width: 100%;
+  padding-bottom: 12px;
+}
+
+.book-row::-webkit-scrollbar {
+  height: 8px;
+}
+.book-row__subtitle {
+  color: #6b7280;
+  font-size: 16px;
+  margin: 8px 0 24px;
 }
 .book-card {
   width: 220px;
@@ -823,16 +835,12 @@ button:disabled {
 
 .book-card__image {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
   border-radius: 8px;
-  transition: all 0.2s ease;
 }
+
 .book-card {
-  width: 220px;
+  width: 200px;
   flex-shrink: 0;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .book-card:hover {
@@ -851,8 +859,33 @@ button:disabled {
   transition: all 0.2s ease;
 }
 .book-card-link {
-  text-decoration: none;
-  color: inherit;
+  flex: 0 0 200px;
+}
+.book-card__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.book-card__author {
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.book-card__subtitle {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-card__details {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 14px;
 }
 .page-title {
   font-size: 48px;
@@ -961,8 +994,8 @@ button:disabled {
 }
 .dashboard__content {
   width: 100%;
-  padding: 56px 4vw;
-  box-sizing: border-box;
+  max-width: calc(100vw - 220px);
+  overflow: hidden;
 }
 .book-row {
   display: flex;
@@ -1167,4 +1200,33 @@ button:disabled {
   border: 1px solid #d9e1e7;
   border-radius: 6px;
   margin: 24px 0 32px;
+}
+.highlights-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.highlights-empty h3 {
+  margin-top: 32px;
+  font-size: 28px;
+}
+
+.highlights-empty p {
+  color: #6b7280;
+  max-width: 500px;
+}
+.library-finished {
+  background: #032b41;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.library-section {
+  margin-bottom: 64px;
 }

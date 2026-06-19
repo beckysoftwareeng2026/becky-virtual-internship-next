@@ -5,12 +5,23 @@ import { getBook } from "@/lib/api";
 import BookCard from "@/components/BookCard";
 import { Book } from "@/lib/types";
 import RemoveFromLibraryButton from "@/components/RemoveFromLibraryButton";
+import MarkFinishedButton from "@/components/MarkFinishedButton";
 
 type Props = {
   bookIds: string[];
+  emptyTitle?: string;
+  emptyText?: string;
+  showBrowseButton?: boolean;
+  showActions?: boolean;
 };
 
-export default function LibraryBooks({ bookIds }: Props) {
+export default function LibraryBooks({
+  bookIds,
+  emptyTitle,
+  emptyText,
+  showBrowseButton,
+  showActions = true,
+}: Props) {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,12 +54,15 @@ export default function LibraryBooks({ bookIds }: Props) {
   if (books.length === 0) {
     return (
       <div className="library-empty">
-        <h3>Your library is empty</h3>
-        <p>Start exploring books and save your favorites.</p>
+        <h3>{emptyTitle || "Your library is empty"}</h3>
 
-        <a href="/for-you" className="library-empty__button">
-          Browse Books
-        </a>
+        <p>{emptyText || "Start exploring books and save your favorites."}</p>
+
+        {showBrowseButton && (
+          <a href="/for-you" className="library-empty__button">
+            Browse Books
+          </a>
+        )}
       </div>
     );
   }
@@ -59,10 +73,16 @@ export default function LibraryBooks({ bookIds }: Props) {
         <div key={book.id} className="library-book">
           <BookCard book={book} />
 
-          <RemoveFromLibraryButton
-            bookId={book.id}
-            onRemove={handleRemove}
-          />
+          {showActions && (
+            <>
+              <RemoveFromLibraryButton
+                bookId={book.id}
+                onRemove={handleRemove}
+              />
+
+              <MarkFinishedButton bookId={book.id} />
+            </>
+          )}
         </div>
       ))}
     </div>

@@ -1,14 +1,30 @@
 import AuthGuard from "@/components/AuthGuard";
-import PageContainer from "@/components/PageContainer";
-import PageTitle from "@/components/PageTitle";
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
 
 export default function HighlightsPage() {
   return (
     <AuthGuard>
-      <PageContainer>
-        <PageTitle>Highlights</PageTitle>
-        <p>Your book highlights will appear here.</p>
-      </PageContainer>
+      <div className="dashboard">
+        <Sidebar />
+
+        <main className="dashboard__main">
+          <Navbar />
+
+          <div className="dashboard__content">
+            <div className="highlights-empty">
+              <h1>Highlights</h1>
+
+              <h3>No highlights yet</h3>
+
+              <p>
+                Your favorite quotes and notes from books
+                will appear here.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
     </AuthGuard>
   );
 }

@@ -30,8 +30,17 @@ return (
     <SectionTitle>Selected just for you</SectionTitle>
     <SelectedBook book={selectedBooks[0]} />
 
-    <BookRow title="Recommended For You" books={recommendedBooks} />
-    <BookRow title="Suggested Books" books={suggestedBooks} />
+ <BookRow
+  title="Recommended For You"
+  subtitle="We think you'll like these"
+  books={recommendedBooks}
+/>
+
+<BookRow
+  title="Suggested Books"
+  subtitle="Browse those books"
+  books={suggestedBooks}
+/>
   </div>
 </main>
     </div>

@@ -8,11 +8,13 @@ import { Book } from "@/lib/types";
 export default function SearchBooks() {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadBooks() {
       const allBooks = await getAllBooks();
       setBooks(allBooks);
+      setLoading(false);
     }
 
     loadBooks();
@@ -33,11 +35,19 @@ export default function SearchBooks() {
         onChange={(e) => setQuery(e.target.value)}
       />
 
-      <div className="book-row">
-        {filteredBooks.map((book) => (
-          <BookCard key={book.id} book={book} />
-        ))}
-      </div>
+      {loading ? (
+        <p>Loading books...</p>
+      ) : query.trim() === "" ? (
+        <p>Start typing to search for books.</p>
+      ) : filteredBooks.length === 0 ? (
+        <p>No books found. Try another search.</p>
+      ) : (
+        <div className="book-row">
+          {filteredBooks.map((book) => (
+            <BookCard key={book.id} book={book} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

@@ -11,17 +11,24 @@ import LibraryBooks from "@/components/LibraryBooks";
 
 export default function LibraryPage() {
   const [bookIds, setBookIds] = useState<string[]>([]);
+  const [finishedBookIds, setFinishedBookIds] = useState<string[]>([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) return;
 
-      const snapshot = await getDocs(
+      const librarySnapshot = await getDocs(
         collection(db, "users", user.uid, "library")
       );
 
-      const ids = snapshot.docs.map((doc) => doc.data().bookId);
-      setBookIds(ids);
+      const finishedSnapshot = await getDocs(
+        collection(db, "users", user.uid, "finished")
+      );
+
+      setBookIds(librarySnapshot.docs.map((doc) => doc.data().bookId));
+      setFinishedBookIds(
+        finishedSnapshot.docs.map((doc) => doc.data().bookId)
+      );
     });
 
     return () => unsubscribe();
@@ -36,13 +43,24 @@ export default function LibraryPage() {
           <Navbar />
 
           <div className="dashboard__content">
-            <h1>My Library</h1>
+          <section className="library-section">
+              <h1>Saved Books</h1>
+              <p>{bookIds.length} items</p>
+              <LibraryBooks bookIds={bookIds} />
+            </section>
 
-            
-              <div>
-                <LibraryBooks bookIds={bookIds} />
-              </div>
-            
+
+          <section className="library-section">
+  <h1>Finished</h1>
+  <p>{finishedBookIds.length} items</p>
+
+  <LibraryBooks
+    bookIds={finishedBookIds}
+    emptyTitle="Done and dusted!"
+    emptyText="When you finish a book, you can find it here later."
+    showActions={false}
+  />
+</section>
           </div>
         </main>
       </div>
