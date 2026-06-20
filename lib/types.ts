@@ -10,4 +10,5 @@ export type Book = {
   audioLink?: string;
   keyIdeas?: number;
   type?: string;
+  audioLength: string;
 };

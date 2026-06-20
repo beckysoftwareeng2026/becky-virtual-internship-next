@@ -1,4 +1,8 @@
 import { getBook } from "@/lib/api";
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+import AuthGuard from "@/components/AuthGuard";
+import BookPage from "@/components/BookPage";
 
 type Props = {
   params: Promise<{
@@ -6,36 +10,26 @@ type Props = {
   }>;
 };
 
-export default async function BookPage({ params }: Props) {
+export default async function BookPageRoute({ params }: Props) {
   const { id } = await params;
 
   const book = await getBook(id);
+  console.log(JSON.stringify(book, null, 2));
+  
 
-  return (
-    <div className="book-page">
+return (
+  <AuthGuard>
+    <div className="dashboard">
+      <Sidebar />
 
-    <h1>{book.title}</h1>
+      <main className="dashboard__main">
+        <Navbar />
 
-    <p>⭐ {book.averageRating}</p>
-    <p>{book.totalRating} ratings</p>
-    <p>{book.keyIdeas} key ideas</p>
-    <p>{book.type}</p>
-
-    <p>{book.author}</p>
-    <p>{book.subTitle}</p>
-
-    <img
-      src={book.imageLink}
-      alt={book.title}
-      width={250}
-    />
-
-    <h2>{book.subTitle}</h2>
-
-    <p className="book-summary">
-      {book.summary}
-    </p>
-
-  </div>
+        <div className="dashboard__content">
+          <BookPage book={book} />
+        </div>
+      </main>
+    </div>
+  </AuthGuard>
 );
 }

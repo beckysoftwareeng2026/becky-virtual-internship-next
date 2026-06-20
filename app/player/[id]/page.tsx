@@ -1,3 +1,5 @@
+import AuthGuard from "@/components/AuthGuard";
+import SectionTitle from "@/components/SectionTitle";
 import { getBook } from "@/lib/api";
 
 type Props = {
@@ -11,6 +13,7 @@ export default async function PlayerPage({ params }: Props) {
   const book = await getBook(id);
 
   return (
+    <AuthGuard>
     <div className="player-page">
     <h1>{book.title}</h1>
 <p>{book.author}</p>
@@ -25,8 +28,9 @@ export default async function PlayerPage({ params }: Props) {
   Your browser does not support the audio element.
 </audio>
 
-      <h2>Summary</h2>
+     <SectionTitle>Summary</SectionTitle>
       <p className="book-summary">{book.summary}</p>
     </div>
+    </AuthGuard>
   );
 }

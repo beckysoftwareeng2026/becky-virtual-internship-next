@@ -6,10 +6,12 @@ import {
 import SectionTitle from "@/components/SectionTitle";
 import BookRow from "@/components/BookRow";
 import SelectedBook from "@/components/SelectedBook";
-import PageTitle from "@/components/PageTitle";
 
-// SelectedBook has an incorrect typing (returns void). Cast to any to allow JSX usage.
-const Selected: any = SelectedBook;
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+import AuthGuard from "@/components/AuthGuard";
+
+
 
 export default async function ForYouPage() {
   const selectedBooks = await getSelectedBooks();
@@ -17,22 +19,33 @@ export default async function ForYouPage() {
   const suggestedBooks = await getSuggestedBooks();
 
 return (
-  <div>
-    <PageTitle>For You</PageTitle>
+  <AuthGuard>
+    <div className="dashboard">
+      <Sidebar />
 
-    <SectionTitle>Selected</SectionTitle>
+      <main className="dashboard__main">
+  <Navbar />
 
-    <Selected book={selectedBooks[0]} />
+  <div className="dashboard__content">
+    <SectionTitle>Selected just for you</SectionTitle>
+    <SelectedBook book={selectedBooks[0]} />
 
-    <BookRow
-      title="Recommended"
-      books={recommendedBooks}
-    />
+ <BookRow
+  title="Recommended For You"
+  subtitle="We think you'll like these"
+  books={recommendedBooks}
+/>
 
-    <BookRow
-      title="Suggested"
-      books={suggestedBooks}
-    />
+<BookRow
+  title="Suggested Books"
+  subtitle="Browse those books"
+  books={suggestedBooks}
+/>
   </div>
+</main>
+    </div>
+  </AuthGuard>
 );
+
+
 }

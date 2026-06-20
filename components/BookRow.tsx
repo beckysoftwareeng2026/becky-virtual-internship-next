@@ -1,16 +1,17 @@
 import BookCard from "./BookCard";
-import SectionTitle from "./SectionTitle";
 import { Book } from "@/lib/types";
 
 type Props = {
   title: string;
+  subtitle?: string;
   books: Book[];
 };
 
-export default function BookRow({ title, books }: Props) {
+export default function BookRow({ title, subtitle, books }: Props) {
   return (
     <>
-      <SectionTitle>{title}</SectionTitle>
+      <h2>{title}</h2>
+{subtitle && <p className="book-row__subtitle">{subtitle}</p>}
 
       <div className="book-row">
         {books.map((book) => (
