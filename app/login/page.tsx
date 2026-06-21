@@ -2,16 +2,49 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import AuthForm from "@/components/AuthForm";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [error, setError] = useState("");
 
   async function handleLogin(email: string, password: string) {
-    await signInWithEmailAndPassword(auth, email, password);
-    router.push("/for-you");
+    try {
+      setError("");
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push("/for-you");
+    } catch (err: any) {
+      if (err.code === "auth/invalid-email") {
+        setError("Please enter a valid email address.");
+      } else if (
+        err.code === "auth/user-not-found" ||
+        err.code === "auth/wrong-password" ||
+        err.code === "auth/invalid-credential"
+      ) {
+        setError("Invalid email or password.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
+  }
+
+  async function handleGuestLogin() {
+    try {
+      setError("");
+      await signInWithEmailAndPassword(
+        auth,
+        "guest@gmail.com",
+        "guest123"
+      );
+      router.push("/for-you");
+    } catch {
+      setError(
+        "Guest login failed. Make sure guest@gmail.com exists in Firebase Authentication."
+      );
+    }
   }
 
   return (
@@ -23,7 +56,11 @@ export default function LoginPage() {
 
         <h2>Log in to Summarist</h2>
 
-        <button className="auth-social auth-guest">
+        <button
+          type="button"
+          className="auth-social auth-guest"
+          onClick={handleGuestLogin}
+        >
           👤 Login as a Guest
         </button>
 
@@ -33,7 +70,7 @@ export default function LoginPage() {
           <span></span>
         </div>
 
-        <button className="auth-social auth-google">
+        <button type="button" className="auth-social auth-google">
           G Login with Google
         </button>
 
@@ -42,6 +79,8 @@ export default function LoginPage() {
           <p>or</p>
           <span></span>
         </div>
+
+        {error && <p className="auth-error">{error}</p>}
 
         <AuthForm buttonText="Login" onSubmit={handleLogin} />
 

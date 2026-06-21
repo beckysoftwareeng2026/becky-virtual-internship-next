@@ -1030,6 +1030,11 @@ button:disabled {
   cursor: pointer;
   padding: 0;
 }
+.sidebar__disabled {
+  color: #6b7280;
+  cursor: not-allowed;
+  font-size: 16px;
+}
 .selected-book {
   background: #f5edd8;
   border-radius: 4px;
@@ -1229,4 +1234,78 @@ button:disabled {
 }
 .library-section {
   margin-bottom: 64px;
+}
+.auth-error {
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.player-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.player-page__book {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.player-page__book img {
+  width: 120px;
+  border-radius: 8px;
+}
+
+.audio-player {
+  background: #032b41;
+  color: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+.audio-player__top {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.audio-player__controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.audio-player__controls button {
+  border: none;
+  background: white;
+  color: #032b41;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.audio-player__play {
+  min-width: 90px;
+}
+
+.audio-player__progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.audio-player__progress input {
+  flex: 1;
+}
+
+.book-summary {
+  white-space: pre-line;
+  line-height: 1.7;
 }

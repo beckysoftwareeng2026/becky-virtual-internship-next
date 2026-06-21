@@ -1,14 +1,38 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase";
 import { Book } from "@/lib/types";
-import ButtonLink from "@/components/ButtonLink";
 import BookStats from "@/components/BookStats";
 import AddToLibraryButton from "@/components/AddToLibraryButton";
+import { isUserSubscribed } from "@/lib/subscription";
 
 type Props = {
   book: Book;
 };
 
 export default function BookPage({ book }: Props) {
+  const router = useRouter();
+
   if (!book) return null;
+
+async function handleReadOrListen() {
+  const user = auth.currentUser;
+
+  if (!user) {
+    router.push("/login");
+    return;
+  }
+
+  const subscribed = await isUserSubscribed(user.uid);
+
+  if (book.subscriptionRequired && !subscribed) {
+    router.push("/choose-plan");
+    return;
+  }
+
+  router.push(`/player/${book.id}`);
+}
 
   return (
     <div className="book-page">
@@ -21,11 +45,11 @@ export default function BookPage({ book }: Props) {
           <BookStats book={book} />
 
           <div className="book-page__buttons">
-            <ButtonLink href={`/book/${book.id}`}>Read</ButtonLink>
-            <ButtonLink href={`/player/${book.id}`}>Listen</ButtonLink>
+            <button onClick={handleReadOrListen}>Read</button>
+            <button onClick={handleReadOrListen}>Listen</button>
           </div>
 
-       <AddToLibraryButton bookId={book.id} />
+          <AddToLibraryButton bookId={book.id} />
         </div>
 
         <div className="book-page__cover">
@@ -34,11 +58,12 @@ export default function BookPage({ book }: Props) {
       </div>
 
       <section className="book-page__section">
-        <h3>What's it about?</h3>
+        <h3>What&apos;s it about?</h3>
 
         <div className="book-page__tags">
-          <span>Communication Skills</span>
-          <span>Technology &amp; the Future</span>
+          {book.tags?.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
         </div>
 
         <p>{book.summary}</p>
@@ -46,7 +71,7 @@ export default function BookPage({ book }: Props) {
 
       <section className="book-page__section">
         <h3>About the author</h3>
-        <p>{book.author}</p>
+        <p>{book.authorDescription}</p>
       </section>
     </div>
   );

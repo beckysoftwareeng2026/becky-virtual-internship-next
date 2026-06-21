@@ -1,23 +1,54 @@
-import Button from "./Button";
+"use client";
+
+import { useState } from "react";
 
 type Props = {
   title: string;
   price: string;
+  plan: "monthly" | "yearly" | "basic";
 };
 
-export default function PlanCard({
-  title,
-  price,
-}: Props) {
+export default function PlanCard({ title, price, plan }: Props) {
+  const [loading, setLoading] = useState(false);
+
+  async function handleCheckout() {
+    if (plan === "basic") return;
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ plan }),
+      });
+
+      const data = await response.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      alert("Checkout failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="plan-card">
-      <h2>{title}</h2>
-
+      <h3>{title}</h3>
       <p>{price}</p>
 
-      <Button>
-        Select Plan
-      </Button>
+      {plan === "basic" ? (
+        <button disabled>Current Plan</button>
+      ) : (
+        <button onClick={handleCheckout} disabled={loading}>
+          {loading ? "Loading..." : "Choose Plan"}
+        </button>
+      )}
     </div>
   );
 }

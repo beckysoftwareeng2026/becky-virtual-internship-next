@@ -1,7 +1,7 @@
 import { getBook } from "@/lib/api";
+import AuthGuard from "@/components/AuthGuard";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
-import AuthGuard from "@/components/AuthGuard";
 import BookPage from "@/components/BookPage";
 
 type Props = {
@@ -15,6 +15,7 @@ export default async function BookPageRoute({ params }: Props) {
 
   const book = await getBook(id);
   console.log(JSON.stringify(book, null, 2));
+ 
   
 
 return (
@@ -32,4 +33,6 @@ return (
     </div>
   </AuthGuard>
 );
+
 }
+

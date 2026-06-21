@@ -16,10 +16,12 @@ export default function AuthGuard({ children }: Props) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
-        router.push("/login");
-      } else {
         setIsChecking(false);
+        router.push("/login");
+        return;
       }
+
+      setIsChecking(false);
     });
 
     return () => unsubscribe();
