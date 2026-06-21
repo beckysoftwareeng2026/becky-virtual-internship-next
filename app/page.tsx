@@ -258,7 +258,9 @@ export default function Page() {
             </div>
           </div>
           <div className="reviews__btn--wrapper">
-            <button className="btn home__cta--btn">Login</button>
+            <Link href="/login" className="btn">
+  Login
+</Link>
           </div>
         </div>
       </div>
