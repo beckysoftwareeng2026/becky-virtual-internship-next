@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LogoutButton from "./LogoutButton";
+import AuthButton from "./AuthButton";
 
 export default function Sidebar() {
   return (
@@ -20,7 +20,7 @@ export default function Sidebar() {
       <nav className="sidebar__bottom">
         <Link href="/settings">⚙ Settings</Link>
         <span className="sidebar__disabled">? Help & Support</span>
-        <LogoutButton />
+       <AuthButton />
       </nav>
     </aside>
   );
