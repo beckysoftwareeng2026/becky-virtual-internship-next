@@ -1,24 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { getAllBooks } from "@/lib/api";
 import BookCard from "@/components/BookCard";
 import { Book } from "@/lib/types";
 
 export default function SearchBooks() {
-  const [query, setQuery] = useState("");
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") || "";
+
+  const [query, setQuery] = useState(initialQuery);
   const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadBooks() {
       const allBooks = await getAllBooks();
       setBooks(allBooks);
-      setLoading(false);
     }
 
     loadBooks();
   }, []);
+
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
 
   const filteredBooks = books.filter((book) =>
     `${book.title} ${book.author} ${book.subTitle}`
@@ -35,19 +41,18 @@ export default function SearchBooks() {
         onChange={(e) => setQuery(e.target.value)}
       />
 
-      {loading ? (
-        <p>Loading books...</p>
-      ) : query.trim() === "" ? (
-        <p>Start typing to search for books.</p>
-      ) : filteredBooks.length === 0 ? (
-        <p>No books found. Try another search.</p>
-      ) : (
-        <div className="book-row">
-          {filteredBooks.map((book) => (
-            <BookCard key={book.id} book={book} />
-          ))}
-        </div>
+      {query && (
+        <p className="search-results-count">
+          Showing {filteredBooks.length} result
+          {filteredBooks.length === 1 ? "" : "s"} for "{query}"
+        </p>
       )}
+
+      <div className="book-row">
+        {filteredBooks.map((book) => (
+          <BookCard key={book.id} book={book} />
+        ))}
+      </div>
     </>
   );
 }

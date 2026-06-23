@@ -3,6 +3,7 @@ import AuthGuard from "@/components/AuthGuard";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import BookPage from "@/components/BookPage";
+import Link from "next/link";
 
 type Props = {
   params: Promise<{
@@ -27,6 +28,9 @@ return (
         <Navbar />
 
         <div className="dashboard__content">
+          <Link href="/for-you" className="back-link">
+  ← Back
+</Link>
           <BookPage book={book} />
         </div>
       </main>

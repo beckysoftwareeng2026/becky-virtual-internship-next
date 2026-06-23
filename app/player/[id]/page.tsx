@@ -3,6 +3,7 @@ import SectionTitle from "@/components/SectionTitle";
 import AudioPlayer from "@/components/AudioPlayer";
 import { getBook } from "@/lib/api";
 import PlayerAccessGuard from "@/components/PlayerAccessGuard";
+import Link from "next/link";
 
 type Props = {
   params: Promise<{
@@ -18,6 +19,9 @@ return (
   <AuthGuard>
     <PlayerAccessGuard book={book}>
       <div className="player-page">
+        <Link href="/for-you" className="back-link">
+  ← Back
+</Link>
         <div className="player-page__book">
           <img src={book.imageLink} alt={book.title} />
 

@@ -752,14 +752,31 @@ button:disabled {
   background: #ccc;
 }
 
-.auth-form input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 16px;
-}
-
 .auth-form button {
   width: 100%;
+  height: 48px;
+  background: #2b2ed9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.auth-form button:hover {
+  background: #20c970;
+}
+
+.auth-form input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  margin-bottom: 16px;
+  border: 1px solid #bac8d3;
+  border-radius: 4px;
+  font-size: 15px;
 }
 
 .auth-link {
@@ -1075,6 +1092,43 @@ button:disabled {
   gap: 12px;
   min-width: 240px;
 }
+@media (max-width: 768px) {
+  .selected-book {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 20px;
+    min-height: auto;
+    overflow: hidden;
+  }
+
+  .selected-book__summary {
+    width: 100%;
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
+  .selected-book__cover {
+    border-left: none;
+    padding-left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .selected-book__cover img {
+    width: 120px;
+  }
+
+  .selected-book__info {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .selected-book__info h3 {
+    font-size: 1.2rem;
+  }
+}
 
 @media (max-width: 1200px) {
   .book-card {
@@ -1084,7 +1138,7 @@ button:disabled {
 
 @media (max-width: 768px) {
   .book-card {
-    flex: 0 0 45%;
+    flex: 0 0 60%;
   }
 }
 
@@ -1132,7 +1186,7 @@ button:disabled {
     opacity: 0.6;
   }
 }
-.book-page__library {
+__lib.book-pagerary {
   margin-top: 12px;
   background: none;
   border: none;
@@ -1308,4 +1362,176 @@ button:disabled {
 .book-summary {
   white-space: pre-line;
   line-height: 1.7;
+}
+.burger-button {
+  display: none;
+  background: none;
+  border: none;
+  color: #032b41;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .dashboard__main {
+    margin-left: 0;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .dashboard__content {
+    max-width: 100%;
+    width: 100%;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .dashboard__navbar {
+    height: 72px;
+    padding: 0 16px;
+    justify-content: space-between;
+  }
+
+  .burger-button {
+    display: block;
+  }
+
+  .dashboard__search {
+    height: auto;
+    padding: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .dashboard__search input {
+    width: min(220px, 100%);
+  }
+
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .mobile-menu .sidebar {
+    display: flex;
+    width: 240px;
+    height: 100vh;
+    background: #f7faf9;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+  }
+
+  .mobile-menu__close {
+    position: fixed;
+    top: 16px;
+    left: 252px;
+    z-index: 10001;
+    background: white;
+    border: none;
+    border-radius: 999px;
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+.book-page__buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.book-page__buttons button {
+  width: 160px;
+  height: 48px;
+  background: #032b41;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.book-page__buttons button:hover {
+  background: #06445f;
+}
+
+@media (max-width: 768px) {
+  .book-page__hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 0;
+    overflow: hidden;
+  }
+
+  .book-page__info {
+    width: 100%;
+  }
+
+  .book-page__info h1 {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+
+  .book-page__cover {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .book-page__cover img {
+    max-width: 180px;
+    width: 100%;
+  }
+
+  .book-page__buttons {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+  }
+
+  .book-page__buttons button {
+    flex: 1;
+    width: auto;
+    height: 48px;
+  }
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #032b41;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.settings-section h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
 }
