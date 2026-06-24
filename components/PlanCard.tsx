@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase";
 
 type Props = {
   title: string;
@@ -10,9 +12,17 @@ type Props = {
 
 export default function PlanCard({ title, price, plan }: Props) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleCheckout() {
     if (plan === "basic") return;
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      router.push("/login");
+      return;
+    }
 
     try {
       setLoading(true);
@@ -26,6 +36,11 @@ export default function PlanCard({ title, price, plan }: Props) {
       });
 
       const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || "Checkout failed. Please try again.");
+        return;
+      }
 
       if (data.url) {
         window.location.href = data.url;
